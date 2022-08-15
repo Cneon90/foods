@@ -6,7 +6,7 @@ namespace app\models;
 
 
 use Yii;
-
+use yii\web\IdentityInterface;
 
 
 /**
@@ -22,7 +22,7 @@ use Yii;
  */
 
 
-class Users extends \yii\db\ActiveRecord
+class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -92,7 +92,7 @@ class Users extends \yii\db\ActiveRecord
         //Валидация формы
         if (Yii::$app->getSecurity()->validatePassword($password,$User->password)) {
             $this->session_login($User);
-            return 1;
+            return $User; //Если такой пользователь есть, возвращаем его
         } else {
             $this->session_logout();
             return 0;
@@ -125,5 +125,28 @@ class Users extends \yii\db\ActiveRecord
     }
 
 
+    public static function findIdentity($id)
+    {
+      return Users :: findOne($id);
+    }
 
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        // TODO: Implement findIdentityByAccessToken() method.
+    }
+
+    public function getId()
+    {
+       return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        // TODO: Implement getAuthKey() method.
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        // TODO: Implement validateAuthKey() method.
+    }
 }

@@ -14,6 +14,7 @@ use Yii;
  *
  * @property OrderDish[] $orderDishes
  */
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 class Orders extends \yii\db\ActiveRecord
 {
     /**

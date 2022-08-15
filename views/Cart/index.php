@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 <pre>
 <?php
-    // print_r($cart_dish);
+
  ?>
 
      <table class="table">
@@ -30,7 +30,8 @@ use yii\helpers\Html;
           <tbody>
         <?php
            $i=1;
-           foreach ($cart_dish as $cart):
+           if (isset($cart_dish))
+              foreach ($cart_dish as $cart):
         ?>
 
 

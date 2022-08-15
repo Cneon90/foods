@@ -37,14 +37,25 @@ class LoginController extends Controller
 
 
 
+//    public function actionConfirm()
+//    {
+//        $session = Yii::$app->session;
+//        $session->open();
+//        $user = new Users();
+//        if($user->authorization($_POST['Login'],$_POST['password'])==0)
+//            return $this->render('index',['Error'=>'1']);
+//        return $this->render('confirm',compact('Login'));
+//    }
+
     public function actionConfirm()
     {
-        $session = Yii::$app->session;
-        $session->open();
-        $user = new Users();
-        if($user->authorization($_POST['Login'],$_POST['password'])==0)
-            return $this->render('index',['Error'=>'1']);
-        return $this->render('confirm',compact('Login'));
+
+       $user = new Users();
+       $auth = $user->authorization($_POST['Login'],$_POST['password']);
+       if($auth==0) {
+           return $this->render('index',['Error'=>'1']);
+       } else Yii::$app->user->login($auth);
+       return $this->render('confirm',compact('Login'));
     }
 
 

@@ -47,9 +47,6 @@ class Cart extends ActiveRecord
         $session->remove('cart.qty');
         $session->remove('cart.sum');
 
-//        $_SESSION['cart'] = '';
-//        $_SESSION['cart.qty'] = 0;
-//        $_SESSION['cart.sum'] = 0;
         return 1;
 
     }
