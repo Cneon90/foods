@@ -44,11 +44,11 @@
         ◦ Уведомления – напоминания сотруднику, что нужно сделать заказ на завтра, если он еще не сделан
 
 
-### Названия сущностей [Скачать](https://github.com/Cneon90/eda/blob/main/Eda.xlsx)
-![Image text](https://github.com/Cneon90/eda/blob/main/description.jpg)
+### Названия сущностей [Скачать](https://github.com/Cneon90/foods/blob/master/Eda.xlsx)
+![Image text](https://github.com/Cneon90/foods/blob/master/description.jpg)
 
 ### Схема связей базы данных
-![Image text](https://github.com/Cneon90/eda/blob/main/scheme.jpg)
+![Image text](https://github.com/Cneon90/foods/blob/master/scheme.jpg)
 
 
 
