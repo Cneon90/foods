@@ -17,9 +17,6 @@ class ApiController extends Controller
 
     public function actionCard()
     {
-
-
-
         return 'hello';
     }
 
@@ -29,15 +26,10 @@ class ApiController extends Controller
         $id = Yii::$app->request->Post('id');
         $dish = Dishs::findOne($id);
         if(!empty($disg)) return 0;
-
-//        print_r($dish);
-//        return 1;
-
         $session = Yii::$app->session;
         $session -> open();
         $cart = new Cart();
         $cart -> addToCart($dish);
-
 
 //        print_r($session['cart']);
 //        print_r('count:'.$session['cart.qty']);

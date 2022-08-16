@@ -3,7 +3,6 @@
 
 namespace app\controllers;
 
-
 use app\models\Workers;
 use yii\base\BaseObject;
 use yii\web\Controller;
@@ -18,27 +17,21 @@ class AdminController extends Controller
    // public $layout = 'login';
     public function actionIndex()
     {
-
         $work = Users::find()->all();
-
         return $this->render('index',compact('users'));
     }
 
     //Показ всех пользователей
     public function actionUsers()
     {
-
         $users = Users::find()->all();
-
         return $this->render('users',compact('users'));
     }
 
     //Показать всех поставщиков
     public function actionVendors()
     {
-
         $vendors = Vendors::find()->all();
-
         return $this->render('vendors',compact('vendors'));
     }
 
@@ -48,15 +41,11 @@ class AdminController extends Controller
     {
         $model = new Users();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // данные в $model удачно проверены
-
-            // делаем что-то полезное с $model ...
             $User = new Users;
             $User -> login = $model->login;
             $User -> first_name = $model-> first_name;
             $User -> last_name = $model-> last_name;
             $User -> phone = $model-> phone;
-
             $hash = Yii::$app->getSecurity()->generatePasswordHash($model->password);
             $User -> password = $hash;
             $User -> status = 3;
@@ -64,7 +53,6 @@ class AdminController extends Controller
             return $this->render('users_confirm', ['model' => $model]);
          }
         else {
-            // либо страница отображается первый раз, либо есть ошибка в данных
                 return $this->render('users_add', ['model' => $model]);
             }
     }
@@ -82,27 +70,20 @@ class AdminController extends Controller
         $model->password = $UserID->password;
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // данные в $model удачно проверены
-
-            // делаем что-то полезное с $model ...
             $User = $UserID;
             $User -> login = $model->login;
             $User -> first_name = $model-> first_name;
             $User -> last_name = $model-> last_name;
             $User -> phone = $model-> phone;
-
             $hash = Yii::$app->getSecurity()->generatePasswordHash($model->password);
             $User -> password = $hash;
             $User -> status = 3;
             $User -> update();
-
-
             $users = Users::find()->all();
 
             return $this->render('users',compact('users'));
         }
         else {
-            // либо страница отображается первый раз, либо есть ошибка в данных
             return $this->render('users_edit', ['model' => $model]);
         }
     }
@@ -132,9 +113,7 @@ class AdminController extends Controller
 
     public function actionDishs()
     {
-
         $dishs = Dishs::find()->all();
-
         return $this->render('dishs',compact('dishs'));
     }
 
@@ -142,12 +121,6 @@ class AdminController extends Controller
     {
         $model = new Dishs();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // данные в $model удачно проверены
-
-//            echo "<pre>";
-//            print_r($model);
-//            echo "</pre>";
-            // делаем что-то полезное с $model ...
             $dish = new Dishs();
             $dish -> name = $model->name;
             $dish -> ingredients = $model-> ingredients;
@@ -157,7 +130,6 @@ class AdminController extends Controller
             return $this->render('dish_confirm', ['model' => $model]);
         }
         else {
-            // либо страница отображается первый раз, либо есть ошибка в данных
             return $this->render('dishs_add', ['model' => $model]);
         }
     }

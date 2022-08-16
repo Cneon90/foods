@@ -32,6 +32,8 @@
      'cart_clear' => 'cart/cartclear',
 
      'dish/<id>' => 'menu/dish',
+     'buy' => 'buy/design',
+     
 
     //'posts/<year>/<category>' => 'login/menu',
 ];

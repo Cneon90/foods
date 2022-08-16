@@ -78,12 +78,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $session = Yii::$app->session;
-
         if (!isset($session['language']))
-
-//        $user = new User();
-//        $user-> login(1);
-
         $dishs = Dishs::find()->all();  //::find()->all();
         return $this->render('index', compact('dishs'));
     }

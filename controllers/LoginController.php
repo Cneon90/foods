@@ -13,13 +13,11 @@ use Yii;
 class LoginController extends Controller
 {
 
-   // public $layout = 'admin';
     public function actionIndex()
     {
         $User = Users::find()->all();
         return $this->render('index',compact('User'));
     }
-
 
     public function actionRegistration()
     {
@@ -34,18 +32,6 @@ class LoginController extends Controller
         }
         return $this->render('registration',['model' => $model]);
     }
-
-
-
-//    public function actionConfirm()
-//    {
-//        $session = Yii::$app->session;
-//        $session->open();
-//        $user = new Users();
-//        if($user->authorization($_POST['Login'],$_POST['password'])==0)
-//            return $this->render('index',['Error'=>'1']);
-//        return $this->render('confirm',compact('Login'));
-//    }
 
     public function actionConfirm()
     {

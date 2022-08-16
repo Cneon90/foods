@@ -62,6 +62,7 @@ use yii\helpers\Html;
 
 
 <a href="/cart_clear"> Очистить корзину </a>
+<a href="/buy"> Оформить зака </a>
 
 
 
