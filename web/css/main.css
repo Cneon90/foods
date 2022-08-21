@@ -251,6 +251,7 @@ html, body {
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.28);
     margin-top: 30px;
+    transition: all 0.5s ease-out;
 }
 
 .foodCard:hover
@@ -297,3 +298,4 @@ html, body {
     background:gray;
     height:200px;
 }
+

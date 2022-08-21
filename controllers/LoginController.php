@@ -29,14 +29,19 @@ class LoginController extends Controller
             if($user->CreateUser($model) == 0) {
                 return $this->render('registration', ['model' => $model,'Error' => '1']);
             }
+            $this->redirect('login');
         }
+
         return $this->render('registration',['model' => $model]);
     }
 
     public function actionConfirm()
     {
-
+       $session = Yii::$app->session;
+        // открываем сессию
+       $session->open();
        $user = new Users();
+       $user->session_logout();
        $auth = $user->authorization($_POST['Login'],$_POST['password']);
        if($auth==0) {
            return $this->render('index',['Error'=>'1']);

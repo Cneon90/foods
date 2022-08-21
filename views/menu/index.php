@@ -12,85 +12,98 @@ $this->params['Content'] =
         
 HERE;
 
+$this->params['max'] = $maxdish;
+
 ?>
 
-<div class="text-center"> <h3>  Меню </h3> <?php echo $this->params['work']; ?> </div>
+<div class="row">
+
+    <div class="col-lg-3 col-md-3 sidebar col-xs-3 visible-lg visible-md">
+
+        <ul class="list-group sidebar-nav hidden-xs hidden-sm">
+           <li><a href="/menu" > Все </a></li>
+        <?php
+          foreach ($catalog as $value): ?>
+
+            <li><a href="<?=Yii::$app->urlManager->createUrl(['menu/'.$value['id']])?>"> <?= $value['name'] ?> </a></li>
+
+         <? endforeach; ?>
+
+        </ul>
+
+    </div>
 
 
-<div class="main_slider">
+    <div class="col-lg-7 col-md-9 col-xs-12 main content">
+        <div class="bar-padding-top-fix visible-lg"> </div>
+
+    <div class="page-header">
+    <h1>Меню</h1>
+    <p>
+        Заказ сделанный после <?= '12:30' ?> будет перенесен на следующий день
+
+    </p>
+    <span class="pull-right hidden-xs"><a href="<?=Yii::$app->urlManager->createUrl(['menu'])?>" class="btn btn-default btn-sm all"><span><i class="material-icons">format_align_right</i></span> Все</a> 	      </span>
+    <span class="pull-right hidden-xs"><a href=" <?=Yii::$app->urlManager->createUrl(['menu/favorites'])?> " class="btn btn-default btn-sm star"><span><i class="material-icons">star_rate</i></span>Избранное</a>    </span>
+    <br>
+</div>
+
+<div class="bar-padding-top-fix visible-xs visible-sm"> </div>
+<div>
+
+    <div class="row">
+
+       <?php foreach ($dishs as $dish): ?>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="thumbnail">
+<!--              <span class="sale-icon-content">-->
+<!--                <span class="sale-icon label">Акция</span>-->
+<!--                <span class="newtip-icon label">Новинка</span>-->
+            </span>
+                <div class="caption">
+                    <a class="product-image" href="<?=Yii::$app->urlManager->createUrl(['dish/'.$dish->id])?>" title="<?= $dish->name ?>">
+<!--                        <img data-src=".." alt="--><?//= $dish->name ?><!--" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">-->
+                    </a>
+
+                    <h5 style="height: 15px;"><a href=".." title="<?= $dish->name ?>"><?= $dish->name ?></a></h5>
+                    <h4 class="product-price" style="height: 27px;"><?= $dish->price ?>&nbsp;₽ <span class=" price-old"></span></h4>
+                    <div class="stock" style="height: 21px;">
 
 
-<?php foreach ($dishs as $dish): ?>
-
-
-
-
-            <div class="product_card">
-                <div class="product_card__main_thread">
-                    <div class="product_card__averse">
-                        <div class="product_card__pins">
-
-                            <div title="Хит" class="type_pin--36"></div>
-                        </div>
-                        <div data-id="115" class="product_card__image">
-                                    <img src="web/img/115.png">
-                        </div>
-
-                        <div class="product_card__group">
-                            <div class="product_card__subgroup" data-id="115">
-                                <div class="product_card__title">
-                                   <?= $dish->name ?>
-                                    <span class="product_card__tooltip prod_tooltip">
-                            <span class="prod_tooltip__trigger t-tooltip" data-chain="115"></span>
-                        </span>
-                                </div>
-
-                                    <div class="product_card__description">
-                                        <?= $dish->ingredients ?>
-                                    </div>
-
-                            </div>
-                            <div class="product_card__cost" data-ar="none">
-                                <div class="product_card__price">
-                                    <div class="product_card__actual_price">
-                                        <?= $dish->price ?>&nbsp;₽
-                                    </div>
-                                    <div class="product_card__old_price old_price" style="display:none;">
-                                        <div class="old_price__crossed">
-                                            <?= $dish->price ?>&nbsp;₽
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="product_card__order">
-                                    <div class="product_card__add_btn" id="<?= $dish->id ?>" data-id="<?= $dish->id ?>" >
-                                        Заказать
-                                    </div>
-                                    <div class="product_card__add_btn" data-product="<?= $dish->id ?>">
-                                        в избранное
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="product_card__reverse">
-
+                        <span class="product-sklad-list-block"> <?= $dish->ingredients ?> <?= $dish->id ?></span>
                     </div>
                 </div>
+                <div class="caption">
 
+                    <button class="btn btn-primary btn-sm btn-block addToCartList product_card__add_btn" id="<?= $dish->id ?>" data-id="<?= $dish->id ?>">В корзину</button>
 
+                    <a class="btn btn-primary btn-sm btn-block  hide hidden" href="" title="">
+                        <input type="hidden" value="<?=Yii::$app->request->getCsrfToken()?>" />
+                    </a>
+                    <? if($page =='favorites'): ?>
+                        <button class="btn btn-default addToWishList btn-sm btn-block delete_favorit" id="<?= $dish->id ?>" data-id="<?= $dish->id ?>">Удалить</button>
+                    <? else: ?>
+                    <button class="btn btn-default addToWishList btn-sm btn-block product_card__favorits_btn " id="<?= $dish->id ?>" data-id="<?= $dish->id ?>">Отложить</button>
+                    <? endif; ?>
+                </div>
             </div>
+        </div>
+
+        <? endforeach; ?>
+
+
+
+    </div>
+</div>
+
+<div class="row">
+
+</div>
 
 
 
 
 
-<? endforeach; ?>
-
-
-            </div>
 
 
 

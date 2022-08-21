@@ -71,6 +71,8 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $_SESSION['authorization'] = 1;
         $_SESSION['Name']  = $User->last_name;
         $_SESSION['Login'] = $User->login;
+        $_SESSION['user_id'] = $User->id;
+        $_SESSION['status'] = $User->status;
     }
 
     public function session_logout()
@@ -78,6 +80,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $_SESSION['authorization'] = 0;
         $_SESSION['Name']  = '';
         $_SESSION['Login'] = '';
+        $_SESSION['user_id'] = '';
     }
 
 
@@ -86,9 +89,10 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $User = self::loginCheck($login);
        //Проверяем логин
-        if ($User->login != $login )
-            return 0;
+        if ($User->login != $login ) {
 
+            return 0;
+        }
         //Валидация формы
         if (Yii::$app->getSecurity()->validatePassword($password,$User->password)) {
             $this->session_login($User);
@@ -120,7 +124,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $User -> save();
 
         //При удачной регистрации сразу авторизуем
-        $this->session_login($User);
+       // $this->session_login($User);
         return 1;
     }
 

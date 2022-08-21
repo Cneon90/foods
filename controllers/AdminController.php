@@ -17,6 +17,18 @@ class AdminController extends Controller
    // public $layout = 'login';
     public function actionIndex()
     {
+        $session = Yii::$app->session;
+        // открываем сессию
+        $session->open();
+
+        $user_id = $_SESSION['user_id'];
+        $user_status = $_SESSION['status'];
+
+        if ($user_status != 3 )
+        {
+            return 0;
+        }
+
         $work = Users::find()->all();
         return $this->render('index',compact('users'));
     }

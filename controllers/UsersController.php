@@ -14,6 +14,10 @@ class UsersController extends Controller
    // public $layout = 'login';
     public function actionIndex()
     {
+        $session = Yii::$app->session;
+        // открываем сессию
+        $session->open();
+
         $work = workers::find()->all();
         return $this->render('index',compact('work'));
     }
@@ -21,6 +25,9 @@ class UsersController extends Controller
 
     public function actionUsers()
     {
+        $session = Yii::$app->session;
+        // открываем сессию
+        $session->open();
         $work = workers::find()->all();
         return $this->render('users',compact('work'));
     }
@@ -28,6 +35,10 @@ class UsersController extends Controller
 
     public function actionAddUser()
     {
+       $session = Yii::$app->session;
+        // открываем сессию
+       $session->open();
+
        $User = new Users;
        $User -> login = 'test';
        $User -> password = Yii::$app->getSecurity()->generatePasswordHash('password');

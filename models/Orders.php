@@ -3,6 +3,21 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Behavior;
+use yii\base\Component;
+use yii\base\Exception;
+use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
+use yii\base\ModelEvent;
+use yii\base\UnknownPropertyException;
+use yii\db\ActiveQuery;
+use yii\db\BaseActiveRecord;
+use yii\db\Exception as DbException;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Inflector;
+use yii\helpers\VarDumper;
+use yii\behaviors\TimestampBehavior;
+
 
 /**
  * This is the model class for table "orders".
@@ -17,6 +32,23 @@ use Yii;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 class Orders extends \yii\db\ActiveRecord
 {
+	
+	
+public function behaviors()
+{
+    return [
+        
+        'saveRelations' => [
+            'class'     => SaveRelationsBehavior::className(),
+            'relations' => [
+                'detail' => ['cascadeDelete' => false],
+                'user' => ['cascadeDelete' => false],
+            ],
+        ],
+    ];
+}	
+	
+	
     /**
      * {@inheritdoc}
      */
@@ -32,7 +64,8 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [['date_create'], 'safe'],
-            [['id_user', 'id_dish'], 'integer'],
+            [['id_user'], 'integer'],
+			
         ];
     }
 
@@ -45,9 +78,19 @@ class Orders extends \yii\db\ActiveRecord
             'id' => 'ID',
             'date_create' => 'Date Create',
             'id_user' => 'Id User',
-            'id_dish' => 'Id Dish',
+           
         ];
     }
+	
+	
+	//Использовать транзакции для SaveRelationsBehavior
+public function transactions()
+{
+    return [
+        self::SCENARIO_DEFAULT => self::OP_ALL,
+    ];
+}
+
 
     /**
      * Gets query for [[OrderDishes]].
@@ -58,4 +101,26 @@ class Orders extends \yii\db\ActiveRecord
     {
         return $this->hasMany(OrderDish::className(), ['id_order' => 'id']);
     }
+
+//    public function getDish()
+//    {
+//        return $this->hasMany(OrderDetail::className(), ['id'=>'id']);
+//    }
+	
+	 public function getUser()
+    {
+        return $this->hasMany(Users::className(), ['id' => 'id_user']);
+    }
+	
+	public function getDetail()
+    {
+        return $this->hasMany(Detail::class, [ 'id' =>  'id_detail' ])
+			->viaTable('order_detail', ['id_order'=>'id']);  
+    }
+	
+	
+	
+	
+
+	
 }

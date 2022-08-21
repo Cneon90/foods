@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 
+use app\models\OrderDetail;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -14,10 +15,14 @@ use app\models\Users;
 use app\models\Vendors;
 use app\models\Dishs;
 use app\models\MenuItems;
+use app\models\service;
+
+
 
 
 class SiteController extends Controller
 {
+
     /**
      * {@inheritdoc}
      */
@@ -78,9 +83,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $session = Yii::$app->session;
+        // открываем сессию
+        $session->open();
+        $session = Yii::$app->session;
         if (!isset($session['language']))
         $dishs = Dishs::find()->all();  //::find()->all();
-        return $this->render('index', compact('dishs'));
+        $serv = new service();
+        $maxdish = $serv->maxDishs();
+        return $this->render('index', compact('dishs','maxdish'));
     }
 
     /**
@@ -90,7 +100,9 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-
+        $session = Yii::$app->session;
+        // открываем сессию
+        $session->open();
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();

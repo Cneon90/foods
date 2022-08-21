@@ -17,10 +17,10 @@ class Cart extends ActiveRecord
            {
                $_SESSION['cart'][$dish->id] =
                    [
+                       'id_dish' => $dish->id,
                        'qty' => $qty,
                        'name'=> $dish -> name,
                        'price'=> $dish -> price,
-
                    ];
            }
 
@@ -28,17 +28,33 @@ class Cart extends ActiveRecord
            $_SESSION['cart.sum'] = isset($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] + $qty * $dish-> price : $qty * $dish-> price;
        }
 
+       //Удаление из корзины (удаляется все количество)
+       public function deleteCart($id)
+       {
+           $cart = $_SESSION['cart'];
+           $minus = $cart[$id]['qty'] * $cart[$id]['price'];
+           $_SESSION['cart.qty'] = $_SESSION['cart.qty'] - $cart[$id]['qty'];
+           $_SESSION['cart.sum'] = $_SESSION['cart.sum'] - $minus;
+           unset($cart[$id]);
+           $_SESSION['cart'] = $cart;
+           return $id;
+       }
+
        public function cart_count()
        {
+           if (empty($_SESSION['cart.qty'])) return 0;
            return $_SESSION['cart.qty'];
        }
 
+
+    //Показ корзины
     public function showCart()
     {
-
         return $_SESSION['cart'];
     }
 
+
+    //Очистка корзины
     public function clearCart()
     {
         $session = \Yii::$app->session;
@@ -46,13 +62,15 @@ class Cart extends ActiveRecord
         $session->remove('cart');
         $session->remove('cart.qty');
         $session->remove('cart.sum');
-
         return 1;
-
     }
+
+
+
 
     public function sum()
     {
+        if (empty($_SESSION['cart.sum'])) return 0;
         return $_SESSION['cart.sum'];
     }
 

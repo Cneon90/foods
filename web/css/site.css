@@ -73,6 +73,11 @@ a.desc:after {
     }
 }
 
+.thumbnail
+{
+    transition: all 0.5s ease-out;
+}
+
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
     text-decoration: none;
@@ -81,4 +86,51 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+.buttons
+{
+    float:right;
+    margin-top:5px;
+}
+
+#cart
+{
+    height:52px;
+}
+
+#cart i
+{
+    font-size:17px;
+}
+
+.footer
+{
+    height: 150px;
+}
+
+.star
+{
+    font-size:10px;
+}
+
+.star i
+{
+    font-size:10px;
+}
+
+.all i
+{
+    font-size:10px;
+}
+
+.all
+{
+    font-size:10px;
+}
+
+
+.content {
+    min-height: calc(100vh - 80px);
+
 }
