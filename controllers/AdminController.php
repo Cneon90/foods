@@ -24,9 +24,9 @@ class AdminController extends Controller
         $user_id = $_SESSION['user_id'];
         $user_status = $_SESSION['status'];
 
-        if ($user_status != 3 )
+        if ($user_status != 4 )
         {
-            return 0;
+            $this->redirect('/');
         }
 
         $work = Users::find()->all();
