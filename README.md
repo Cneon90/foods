@@ -44,13 +44,11 @@
         ◦ Уведомления – напоминания сотруднику, что нужно сделать заказ на завтра, если он еще не сделан
 
 
-### Названия сущностей [Скачать](https://github.com/Cneon90/eda/blob/main/Eda.xlsx)
-![Image text](https://github.com/Cneon90/eda/blob/main/description.jpg)
+### Названия сущностей [Скачать](https://github.com/Cneon90/foods/blob/master/Eda.xlsx)
+![Image text](https://github.com/Cneon90/foods/blob/master/description.jpg)
 
 ### Схема связей базы данных
-![Image text](https://github.com/Cneon90/eda/blob/main/scheme.jpg)
-
-
+![Image text](https://github.com/Cneon90/foods/blob/master/scheme.jpg)
 
 
 #### На данный момент выполнено: 
@@ -61,10 +59,11 @@
   4. Добавление резделов меню
   
   ##### Пользовательская часть
-  1. Авторизация - пока написана своя, но уже разобрался как работает фрейморка, в ближайшее время переделаю
-  2. Регистрация
+  1. Авторизация 
+  2. Регистрация - (необходимо переделать)
   3. Формирование корзины.
   4. Вывод списка блюд (разделы меню еще не добавлены)
 
 
+- Сделаны ЧПУ, файл маршрутов вынесен в ```foods/config/route.php``` 
 
