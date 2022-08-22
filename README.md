@@ -48,7 +48,7 @@
 ![Image text](https://github.com/Cneon90/foods/blob/master/description.jpg)
 
 ### Схема связей базы данных
-![Image text](https://github.com/Cneon90/foods/blob/master/scheme_2.jpg)
+![Image text](https://github.com/Cneon90/foods/blob/master/shema.jpg)
 
 ``` -- Обновление 0.0.0 ```
 
